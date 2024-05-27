@@ -1,4 +1,3 @@
-import pandas as pd
 from dash import html, dcc
 from data_reader import df_no_constraints, df_after_constraints
 
@@ -136,6 +135,71 @@ def define_layout(app):
                 ),
                 dcc.Graph(id='metrics-compliance')
             ], style={'width': '99%', 'padding': '20px'}),  # Full width and some padding for aesthetics
+
+        # Fourth and additional figure if wanted by the user
+        html.Div([
+            dcc.Checklist(
+                id='show-figure',
+                options=[{'label': 'Show Additional Figure', 'value': 'show'}],
+                value=[],
+                inline=True
+            ),
+            html.Div(id='figure-container', children=[]),
+            # Second graph input components
+            html.Div(id='additional-figure-inputs', children=[
+                html.Label("Select Model"),
+                dcc.Dropdown(
+                    id='model-dropdown-metric-constraint-2',
+                    options=[{'label': col, 'value': col} for col in [
+                        'RMR_MODEL_LOGIN_1_model_score1', 'login22_score'
+                    ]],
+                    value='RMR_MODEL_LOGIN_1_model_score1',
+                    style={'width': '40%', 'marginBottom': '10px'}  # Adds spacing below the dropdown
+                ),
+                html.Label("Select Metrics"),
+                dcc.Dropdown(
+                    id='metrics-constraint-dropdown-2',
+                    options=[{'label': col, 'value': col} for col in [
+                        'prevention_rate', 'bad_rate', 'goods_actioned', 'accuracy', 'num_of_sessions_total'
+                    ]],
+                    multi=True,
+                    style={'width': '40%', 'marginBottom': '10px'}  
+                ),
+                html.Label("Select Segments"),
+                dcc.Dropdown(
+                    id='segment-dropdown-metric-constraint-2',
+                    options=[{'label': segment, 'value': segment} for segment in df_no_constraints['opt_segment'].unique()],
+                    multi=True,
+                    placeholder="Select one or more segments",  # Placeholder text when nothing is selected
+                    style={'width': '40%', 'marginBottom': '20px'}
+                ),
+                dcc.Checklist(
+                    id='non-compliant-toggle-2',
+                    options=[
+                        {'label': 'Show only non-compliant candidates', 'value': 'show_non_compliant'}
+                    ],
+                    value=[]  # Initially unchecked
+                ),
+                dcc.Checklist(
+                    id='compliant-toggle-2',
+                    options=[
+                        {'label': 'Show only compliant candidates', 'value': 'show_compliant'}
+                    ],
+                    value=[],  # Initially unchecked
+                    style={'marginBottom': '10px'}
+                ),
+                dcc.Checklist(
+                    id='objf-toggle-2',
+                    options=[
+                        {'label': 'Show Objective Function', 'value': 'show_objective_function'}
+                    ],
+                    value=['show_objective_function'],  # Initially unchecked
+                    style={'marginBottom': '10px'}
+                ),
+                dcc.Graph(id='metrics-compliance-2')
+            ], style={'display': 'none'})  # Initially hidden
+    
+            ])
         ])
     ])
     return app
