@@ -136,6 +136,7 @@ def define_layout(app):
                 dcc.Graph(id='metrics-compliance')
             ], style={'width': '99%', 'padding': '20px'}),  # Full width and some padding for aesthetics
 
+        
         # Fourth and additional figure if wanted by the user
         html.Div([
             dcc.Checklist(
@@ -144,7 +145,6 @@ def define_layout(app):
                 value=[],
                 inline=True
             ),
-            html.Div(id='figure-container', children=[]),
             # Second graph input components
             html.Div(id='additional-figure-inputs', children=[
                 html.Label("Select Model"),
@@ -196,8 +196,8 @@ def define_layout(app):
                     value=['show_objective_function'],  # Initially unchecked
                     style={'marginBottom': '10px'}
                 ),
-                dcc.Graph(id='metrics-compliance-2')
-            ], style={'display': 'none'})  # Initially hidden
+            ], style={'display': 'none'}),  # Initially hidden
+            html.Div(id='figure-container', children=[])
     
             ])
         ])

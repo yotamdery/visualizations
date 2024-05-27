@@ -47,7 +47,7 @@ def update_graph(selected_model: str, selected_metrics: list, selected_segments:
     return create_metrics_compliant_constraints_fig(selected_model, selected_metrics, selected_segments, filter_non_compliant, filter_compliant, show_objf)
 
 # Callbacks to update the additional forth graph based on selections - based on the app.layout
-# Callbacks to toggle the additional inputs
+# Callbacks to toggle the visibility of additional inputs
 @app.callback(
     Output('additional-figure-inputs', 'style'),
     Input('show-figure', 'value')
@@ -57,9 +57,10 @@ def toggle_additional_inputs(show_figure):
         return {'display': 'block'}
     return {'display': 'none'}
 
+# Callbacks to update the additional fourth graph based on selections - based on the app.layout
 @app.callback(
-    Output('metrics-container', 'children'),
-     [Input('show-figure', 'value'),
+    Output('figure-container', 'children'),
+    [Input('show-figure', 'value'),
      Input('model-dropdown-metric-constraint-2', 'value'),
      Input('metrics-constraint-dropdown-2', 'value'),
      Input('segment-dropdown-metric-constraint-2', 'value'),
