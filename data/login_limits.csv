@@ -1,0 +1,15 @@
+opt_segment,datatype,prevention_rate_lower,prevention_rate_upper,accuracy_lower,accuracy_upper,bad_rate_lower,bad_rate_upper,num_of_sessions_total_lower,num_of_sessions_total_upper
+LS_0120_pw_good_AA,ALL,0.074642857,inf,0.021059829,inf,0.0001,inf,3000,inf
+LS_0120_pw_good_XO,ALL,0.017431193,inf,0.076190476,inf,0.0001,inf,3000,inf
+LS_0120_pw_good_other,ALL,0.042462312,inf,0.138666667,inf,0.0001,inf,3000,inf
+LS_0120_pw_gray_AA,ALL,0.02319542,inf,0.785279035,inf,0.0001,inf,3000,inf
+LS_0120_pw_gray_XO,ALL,0.672945426,inf,0.796118579,inf,0.0001,inf,3000,inf
+LS_0120_pw_gray_other,ALL,0.011079743,inf,0.64743083,inf,0.0001,inf,3000,inf
+LS_0120_pw_risky_API,ALL,0.612156675,inf,0.421397891,inf,0.0001,inf,3000,inf
+LS_0120_pw_risky_Mweb_XO,ALL,0.651344308,inf,0.793094664,inf,0.0001,inf,3000,inf
+LS_0120_pw_risky_app_AA,ALL,0.893808678,inf,0.459922605,inf,0.0001,inf,3000,inf
+LS_0120_pw_risky_other,ALL,0.25333698,inf,0.791708516,inf,0.0001,inf,3000,inf
+LS_0120_pw_risky_web_AA,ALL,0.011642463,inf,0.771879225,inf,0.0001,inf,3000,inf
+LS_0120_pw_risky_web_XO,ALL,0.000340431,inf,0.8,inf,0.0001,inf,3000,inf
+LS_0120_pw_trusted_AA,ALL,4.35E-05,inf,0.15,inf,0.0001,inf,3000,inf
+LS_0120_pw_trusted_XO,ALL,0.000375735,inf,0.031367691,inf,0.0001,inf,3000,inf
