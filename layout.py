@@ -73,6 +73,13 @@ def define_layout(app):
                     placeholder="Select one or more segments",  # Placeholder text when nothing is selected
                     style={'width': '40%', 'marginBottom': '20px'}
                 ),
+                # Note that for default values I insert the current weights as the current coArgs shows
+                html.Label("Scalar for Accuracy (X)"),
+                dcc.Input(id='scalar-x', type='number', value=0.6, style={'marginBottom': '10px', 'marginRight': '20px'}),
+                html.Label("Scalar for Prevention Rate (Y)"),
+                dcc.Input(id='scalar-y', type='number', value=0.2, style={'marginBottom': '10px', 'marginRight': '20px'}),
+                html.Label("Scalar for Goods Actioned (Z)"),
+                dcc.Input(id='scalar-z', type='number', value=-0.2, style={'marginBottom': '20px'}),
                 dcc.Graph(id='objf-per-score')
             ], style={'width': '99%', 'padding': '20px'}),  # Full width and some padding for aesthetics
 

@@ -25,11 +25,13 @@ def update_graph(selected_model, selected_metric, selected_segments):
 @app.callback(
     Output('objf-per-score', 'figure'),
     [Input('model-dropdown-objf', 'value'),
-     Input('segment-dropdown-objf', 'value')]
+     Input('segment-dropdown-objf', 'value'),
+     Input('scalar-x', 'value'),
+     Input('scalar-y', 'value'),
+     Input('scalar-z', 'value')]
 )
-
-def update_graph(selected_model, selected_segments):
-    return create_objf_per_score_fig(selected_model, selected_segments)
+def update_objf_per_score_graph(selected_model, selected_segments, scalar_x, scalar_y, scalar_z):
+    return create_objf_per_score_fig(selected_model, selected_segments, scalar_x, scalar_y, scalar_z)
 
 
 # Callbacks to update the third graph based on selections - based on the app.layout
@@ -46,7 +48,7 @@ def update_graph(selected_model, selected_segments):
 def update_graph(selected_model: str, selected_metrics: list, selected_segments: list, filter_non_compliant: list, filter_compliant: list, show_objf: list):
     return create_metrics_compliant_constraints_fig(selected_model, selected_metrics, selected_segments, filter_non_compliant, filter_compliant, show_objf)
 
-# Callbacks to update the additional forth graph based on selections - based on the app.layout
+## Callbacks to update the additional forth graph based on selections - based on the app.layout
 # Callbacks to toggle the visibility of additional inputs
 @app.callback(
     Output('additional-figure-inputs', 'style'),
