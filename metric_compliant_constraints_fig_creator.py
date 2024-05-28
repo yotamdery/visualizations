@@ -5,7 +5,9 @@ import plotly.graph_objects as go
 from plotly.colors import qualitative
 from data_reader import df_no_constraints, login_limits
 
-def create_metrics_compliant_constraints_fig(selected_model: str, selected_metrics: list, selected_segments: list, filter_non_compliant: list, filter_compliant: list, show_objf: list):
+def create_metrics_compliant_constraints_fig(selected_model: str, selected_metrics: list, selected_segments: list, 
+                                             filter_non_compliant: list, filter_compliant: list, show_objf: list,
+                                             scalar_x: float, scalar_y: float, scalar_z: float):
     if selected_segments and selected_metrics: 
         # Plot object definition 
         fig = go.Figure()
@@ -81,7 +83,7 @@ def create_metrics_compliant_constraints_fig(selected_model: str, selected_metri
         # Add horizontal lines to the figure, according to the boundries
         add_horizontal_lines(fig, get_boundaries(selected_metrics, selected_segments), selected_model, segment_colors)
         if 'show_objective_function' in show_objf:
-            plot_objf_trend(fig, filtered_df, selected_model, selected_segments)
+            plot_objf_trend(fig, filtered_df, selected_model, selected_segments, scalar_x, scalar_y, scalar_z)
         fig = update_fig_layout(fig, title='Compliant to Constraints', xaxis_title=selected_model, yaxis_title='Metrics Value')
         
     else:
@@ -180,10 +182,17 @@ def add_horizontal_lines(fig, boundaries: pd.DataFrame, selected_model: str, seg
                 ))
 
 
-def plot_objf_trend(fig, df: pd.DataFrame, selected_model: str, selected_segments: list) -> None:
+def plot_objf_trend(fig, df: pd.DataFrame, selected_model: str, selected_segments: list,
+                    scalar_x: float, scalar_y: float, scalar_z: float) -> None:
+    
     for segment in selected_segments:
         segment_df = df[df['opt_segment'] == segment]
         
+        # Recalculate 'objf' based on the specified scalars
+        segment_df['objf'] = (scalar_x * segment_df['accuracy'] + 
+                                scalar_y * segment_df['prevention_rate'] + 
+                                scalar_z * segment_df['goods_actioned'])
+
         fig.add_trace(go.Scatter(
             x=segment_df[selected_model],
             y=segment_df['objf'],

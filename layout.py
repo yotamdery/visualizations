@@ -74,13 +74,19 @@ def define_layout(app):
                     style={'width': '40%', 'marginBottom': '20px'}
                 ),
                 # Note that for default values I insert the current weights as the current coArgs shows
-                html.Label("Scalar for Accuracy (X)"),
-                dcc.Input(id='scalar-x', type='number', value=0.6, style={'marginBottom': '10px', 'marginRight': '20px'}),
-                html.Label("Scalar for Prevention Rate (Y)"),
-                dcc.Input(id='scalar-y', type='number', value=0.2, style={'marginBottom': '10px', 'marginRight': '20px'}),
-                html.Label("Scalar for Goods Actioned (Z)"),
-                dcc.Input(id='scalar-z', type='number', value=-0.2, style={'marginBottom': '20px'}),
-                dcc.Graph(id='objf-per-score')
+                html.Div([
+                    html.Label("Select Objectibe Function Weights:")], 
+                    style={'marginBottom': '10px'}),
+                html.Div([
+                    html.Label("Weight for Accuracy (X)"),
+                    dcc.Input(id='scalar-x', type='number', value=0.6, style={'marginBottom': '10px', 'marginRight': '20px'}),
+                    html.Label("Weight for Prevention Rate (Y)"),
+                    dcc.Input(id='scalar-y', type='number', value=0.2, style={'marginBottom': '10px', 'marginRight': '20px'}),
+                    html.Label("Weight for Goods Actioned (Z)"),
+                    dcc.Input(id='scalar-z', type='number', value=-0.2, style={'marginBottom': '20px'}),
+                    dcc.Graph(id='objf-per-score')
+                ]),
+                
             ], style={'width': '99%', 'padding': '20px'}),  # Full width and some padding for aesthetics
 
             # Container for the third graph and its controls
@@ -140,8 +146,22 @@ def define_layout(app):
                     value=['show_objective_function'],  # Initially unchecked
                     style={'marginBottom': '10px'}
                 ),
+
+                html.Div([
+                    html.Label("Select Objectibe Function Weights:")], 
+                    style={'marginBottom': '10px'}),
+                html.Div([
+                    html.Label("Select Objectibe Function Weights:"),
+                    html.Label("Weight for Accuracy (X)"),
+                    dcc.Input(id='scalar-x-metric', type='number', value=0.6, style={'marginBottom': '10px', 'marginRight': '20px'}),
+                    html.Label("Weight for Prevention Rate (Y)"),
+                    dcc.Input(id='scalar-y-metric', type='number', value=0.2, style={'marginBottom': '10px', 'marginRight': '20px'}),
+                    html.Label("Weight for Goods Actioned (Z)"),
+                    dcc.Input(id='scalar-z-metric', type='number', value=-0.2, style={'marginBottom': '20px', 'marginRight': '10px'}),
+                ]),
+            
                 dcc.Graph(id='metrics-compliance')
-            ], style={'width': '99%', 'padding': '20px'}),  # Full width and some padding for aesthetics
+                ], style={'width': '99%', 'padding': '20px'}),  # Full width and some padding for aesthetics
 
         
         # Fourth and additional figure if wanted by the user
@@ -201,11 +221,24 @@ def define_layout(app):
                         {'label': 'Show Objective Function', 'value': 'show_objective_function'}
                     ],
                     value=['show_objective_function'],  # Initially unchecked
-                    style={'marginBottom': '10px'}
+                    style={'marginBottom': '30px'}
                 ),
-            ], style={'display': 'none'}),  # Initially hidden
-            html.Div(id='figure-container', children=[])
-    
+
+                html.Div([
+                    html.Label("Select Objectibe Function Weights:")], 
+                    style={'marginBottom': '10px'}),
+                html.Div([
+                    html.Label("Select Objectibe Function Weights:"),
+                    html.Label("Weight for Accuracy (X)"),
+                    dcc.Input(id='scalar-x-metric-2', type='number', value=0.6, style={'marginBottom': '10px', 'marginRight': '20px'}),
+                    html.Label("Weight for Prevention Rate (Y)"),
+                    dcc.Input(id='scalar-y-metric-2', type='number', value=0.2, style={'marginBottom': '10px', 'marginRight': '20px'}),
+                    html.Label("Weight for Goods Actioned (Z)"),
+                    dcc.Input(id='scalar-z-metric-2', type='number', value=-0.2, style={'marginBottom': '20px', 'marginRight': '20px'}),
+                ]),
+
+                ], style={'display': 'none'}),  # Initially hidden
+                html.Div(id='figure-container', children=[])
             ])
         ])
     ])
